@@ -1,0 +1,10 @@
+# 周五 家庭局
+yuehui      260
+zhida       225
+luantao     167
+chentian    125
+xiaoyue     -25
+zhangcheng  -50
+minjin      -50
+lixian      -200
+siyi        -400

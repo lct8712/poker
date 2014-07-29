@@ -1,0 +1,16 @@
+# 周三
+zhida       450
+sunny       250
+liangliang  200
+lixian      150
+zhangcheng  127.5
+toy         50
+yanguang    0
+songge      0
+luantao     -10
+ruirui      -50
+niuli       -50
+xiaohui     -110
+dahai       -150
+yuehui      -360
+yuzhou      -500

@@ -1,0 +1,11 @@
+# 周五
+zhida       400
+luantao     79
+lixian      40
+sunny       -20
+zhangcheng  -29.5
+yuehui      -30
+dahai       -40
+yanguang    -100
+niuli       -150
+toy         -150

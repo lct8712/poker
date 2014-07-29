@@ -1,0 +1,9 @@
+# 周六
+toy         140
+zhida       140
+liuqi       6
+xiaohui     -11
+liangliang  -13
+chentian    -40
+songlin     -68
+luantao     -155

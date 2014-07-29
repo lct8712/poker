@@ -1,0 +1,8 @@
+# 周四
+zhida       -250
+toy         -70
+sunny       190
+dahai       -50
+liangliang  225
+xiaohui     -50
+yuehui      0

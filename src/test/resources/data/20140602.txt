@@ -1,0 +1,5 @@
+toy         95
+chentian    10
+zhiyong     0
+zhangcheng  -5
+lixian      -100

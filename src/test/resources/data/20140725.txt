@@ -1,0 +1,7 @@
+# 周五
+songge      94.5
+xiaohui     50
+luantao     45
+sunny       -15
+liuqi       -50
+toy         -125

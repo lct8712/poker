@@ -1,0 +1,12 @@
+# 周六
+xiaoqing    75.5
+yuzhou      69.75
+chentian    25
+sunny       17.5
+xiaohui     13
+ruirui      0
+songge      0
+songlin     -4
+zhangcheng  -21.75
+lixian      -45
+luantao     -130

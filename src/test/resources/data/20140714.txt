@@ -1,0 +1,10 @@
+# 周一 世界杯
+toy         0
+liuqi       -100
+xiaohui     -50
+dahai       -80
+yuzhou      213
+zhida       118.5
+yuehui      -41
+xiaoyue     -40
+chentian    -25

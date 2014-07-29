@@ -1,0 +1,6 @@
+gaorongxing 200
+xiaohui     81.5
+pengcheng   -50
+xiaoyue     -50
+wensy       -130
+liujinyu    -100

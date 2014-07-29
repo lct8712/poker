@@ -1,0 +1,11 @@
+# 周三
+zhida       -116
+yuzhou      130
+chentian    -15
+toy         -75
+xiaoyue     118
+xiaohui     -166.5
+yanguang    -50
+liangliang  137.5
+songge      15
+luantao     22.25

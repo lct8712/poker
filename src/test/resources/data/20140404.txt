@@ -1,0 +1,11 @@
+# 周五
+yuehui      238.5
+lixian      99.5
+sunny       60
+zhida       14
+zhangcheng  0
+luantao     -27.5
+wensy       -37
+siyi        -50
+xiaohui     -50
+minjin      -247.5

@@ -1,0 +1,16 @@
+# 周五
+toy         165
+xiaoqing    156.25
+xiaoyue     120
+sunny       60
+ruirui      34.75
+chentian    28.5
+jingjing    23
+yuehui      12.5
+yanguang    -10
+liangliang  -12.5
+lixian      -33.75
+gaorongxing -40.25
+yaopeng     -100
+yuzhou      -190
+luantao     -218.25

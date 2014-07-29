@@ -1,0 +1,8 @@
+zhiyong     488.5
+zhangcheng  235.5
+toy         40
+luantao     24.05
+songge      -98.6
+lixian      -140.75
+xiaohui     -217.85
+zhida       -375.55
