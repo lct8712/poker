@@ -12,7 +12,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="fileDaoImpl" class="com.wandoujia.poker.dao.DataDaoFileImpl">
+    <bean id="dataDao" class="com.wandoujia.poker.dao.DataDaoFileImpl">
         <property name="dataFileDir" value="${data.dir}"/>
     </bean>
 

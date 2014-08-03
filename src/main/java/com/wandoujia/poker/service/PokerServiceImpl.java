@@ -26,19 +26,28 @@ public class PokerServiceImpl implements PokerService {
     private Map<String, PlayerDataBean> playerDataBeans = new HashMap<String, PlayerDataBean>();
 
     @Override
-    public void reloadData() {
+    public boolean reloadData() {
         gameInfoBeans = dataDao.loadGameInfos();
         parsePlayers();
+        return !gameInfoBeans.isEmpty();
     }
 
     @Override
     public List<GameInfoBean> getGameInfoBeans() {
+        tryToReloadData();
         return gameInfoBeans;
     }
 
     @Override
     public Map<String, PlayerDataBean> getPlayerDataBeans() {
+        tryToReloadData();
         return playerDataBeans;
+    }
+
+    private void tryToReloadData() {
+        if (gameInfoBeans.isEmpty()) {
+            reloadData();
+        }
     }
 
     private void parsePlayers() {

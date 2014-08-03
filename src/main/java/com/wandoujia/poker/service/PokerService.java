@@ -10,7 +10,7 @@ import com.wandoujia.poker.models.PlayerDataBean;
  * @author chentian
  */
 public interface PokerService {
-    void reloadData();
+    boolean reloadData();
     List<GameInfoBean> getGameInfoBeans();
     Map<String, PlayerDataBean> getPlayerDataBeans();
 }

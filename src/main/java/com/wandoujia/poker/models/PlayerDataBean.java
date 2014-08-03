@@ -1,7 +1,6 @@
 package com.wandoujia.poker.models;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import lombok.Data;
@@ -28,8 +27,6 @@ public class PlayerDataBean {
             return;
         }
 
-        Collections.sort(history);
-        Collections.reverse(history);
         sum = StatisticsUtil.computeSum(history);
         mean = StatisticsUtil.computeMean(history);
         stdDev = StatisticsUtil.computeStandardDeviation(history);

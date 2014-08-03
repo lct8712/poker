@@ -18,9 +18,11 @@ poker
 - 每次的数据是一个文件
 
 # 接口
-common prefix: poker/api
-/player/all
-/player/search/{username}
+/api/player/all
+/api/player/search/{username}
+/api/player/ranking
 
-/game/all
-/game/
+/api/game/all
+/api/game/
+
+/api/reload
