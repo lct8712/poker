@@ -1,10 +1,8 @@
 package com.wandoujia.poker.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +23,10 @@ public class PokerServiceImpl implements PokerService {
     private List<GameInfoBean> gameInfoBeans = new ArrayList<GameInfoBean>();
     private Map<String, PlayerDataBean> playerDataBeans = new HashMap<String, PlayerDataBean>();
 
+    enum RankingType {
+        sum, count, mean, stddev
+    }
+
     @Override
     public boolean reloadData() {
         gameInfoBeans = dataDao.loadGameInfos();
@@ -42,6 +44,49 @@ public class PokerServiceImpl implements PokerService {
     public Map<String, PlayerDataBean> getPlayerDataBeans() {
         tryToReloadData();
         return playerDataBeans;
+    }
+
+    @Override
+    public List<PlayerDataBean> getPlayerWithRanking(String type) {
+        tryToReloadData();
+        List<PlayerDataBean> result = new ArrayList<PlayerDataBean>(playerDataBeans.values());
+        if (!StringUtils.isNotEmpty(type)) {
+            throw new IllegalArgumentException(getSupportTypeDesription());
+        }
+
+        RankingType rankingType;
+        try {
+            rankingType = RankingType.valueOf(type);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(getSupportTypeDesription());
+        }
+        switch (rankingType) {
+            case sum:
+                Collections.sort(result, PlayerDataBean.getSumComparator());
+                break;
+            case count:
+                Collections.sort(result, PlayerDataBean.getCountComparator());
+                break;
+            case mean:
+                Collections.sort(result, PlayerDataBean.getMeanComparator());
+                break;
+            case stddev:
+                Collections.sort(result, PlayerDataBean.getStdDevComparator());
+                break;
+            default:
+                throw new IllegalArgumentException(getSupportTypeDesription());
+        }
+        Collections.reverse(result);
+        return result;
+    }
+
+    private String getSupportTypeDesription() {
+        StringBuilder content = new StringBuilder();
+        for (RankingType rankingType : RankingType.values()) {
+            content.append(rankingType);
+            content.append(", ");
+        }
+        return content.toString();
     }
 
     private void tryToReloadData() {

@@ -1,6 +1,9 @@
 package com.wandoujia.poker.controllers;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +40,12 @@ public class PlayerController {
 
     @RequestMapping(value = "/ranking")
     public @ResponseBody
-    String ranking() {
-        Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans();
-        return new Gson().toJson(players);
+    String ranking(HttpServletRequest request) {
+        try {
+            List<PlayerDataBean> players = pokerService.getPlayerWithRanking(request.getParameter("type"));
+            return new Gson().toJson(players);
+        } catch (IllegalArgumentException e) {
+            return "usage: type = " + e.getMessage();
+        }
     }
 }

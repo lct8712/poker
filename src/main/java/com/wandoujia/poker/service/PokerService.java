@@ -13,4 +13,5 @@ public interface PokerService {
     boolean reloadData();
     List<GameInfoBean> getGameInfoBeans();
     Map<String, PlayerDataBean> getPlayerDataBeans();
+    List<PlayerDataBean> getPlayerWithRanking(String type);
 }
