@@ -19,7 +19,7 @@ public class CommonController {
 
     @RequestMapping(value = "/reload")
     public @ResponseBody
-    String relaod() {
+    String reload() {
         return new Gson().toJson(pokerService.reloadData());
     }
 }

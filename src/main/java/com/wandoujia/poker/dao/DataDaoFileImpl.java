@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
@@ -21,24 +22,23 @@ import com.wandoujia.poker.models.GameInfoBean;
 public class DataDaoFileImpl implements DataDao {
     private static final String COMMENTS_PREFIX = "#";
     private static final Pattern PLAYER_PATTERN = Pattern.compile(" +");
+    private static final String[] DATA_FILE_EXTENSIONS = new String[]{"*.txt"};
 
     private String dataFileDir;
 
     @Override
     public List<GameInfoBean> loadGameInfos() {
-        File dataDirectory = new File(this.dataFileDir);
-        if (!dataDirectory.exists()) {
+        AtomicReference<File> dataDirectory = new AtomicReference<File>(new File(this.dataFileDir));
+        if (!dataDirectory.get().exists()) {
             return Collections.emptyList();
         }
 
         List<GameInfoBean> result = new ArrayList<GameInfoBean>();
-        for (File file : dataDirectory.listFiles()) {
+        for (File file : FileUtils.listFiles(dataDirectory.get(), DATA_FILE_EXTENSIONS, false)) {
             try {
                 result.add(readGameInfoBeanFromFile(file));
-            } catch (IOException e) {
-                continue;
-            } catch (ParseException e) {
-                continue;
+            } catch (IOException ignored) {
+            } catch (ParseException ignored) {
             }
         }
         return result;

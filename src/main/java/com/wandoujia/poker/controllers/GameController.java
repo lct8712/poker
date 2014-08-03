@@ -2,8 +2,6 @@ package com.wandoujia.poker.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +22,7 @@ public class GameController {
 
     @RequestMapping(value = "/all")
     public @ResponseBody
-    String getAll(HttpServletResponse response) {
+    String getAll() {
         List<GameInfoBean> games = pokerService.getGameInfoBeans();
         return new Gson().toJson(games);
     }

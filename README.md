@@ -20,7 +20,7 @@ poker
 # 接口
 /api/player/all
 /api/player/search/{username}
-/api/player/ranking
+/api/player/ranking?type={sum,count,mean,stddev}
 
 /api/game/all
 /api/game/
