@@ -10,6 +10,8 @@ import com.wandoujia.poker.dao.DataDaoFileImpl;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.models.PlayerDataBean;
 
+import static org.junit.Assert.assertFalse;
+
 public class PokerServiceImplTest {
     private static final String DATA_FILE_DIR = "/Users/lingchentian/Documents/Github/poker/src/test/resources/data";
     private DataDaoFileImpl fileDao = new DataDaoFileImpl();
@@ -25,7 +27,9 @@ public class PokerServiceImplTest {
     @Test
     public void testGetGameInfoBeans() throws Exception {
         List<GameInfoBean> games = pokerService.getGameInfoBeans();
+        assertFalse(games.isEmpty());
         Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans();
+        assertFalse(players.isEmpty());
 
         for (PlayerDataBean player : players.values()) {
             System.out.printf("%s\t%.2f\t%.2f\t%.2f\t%d\n",

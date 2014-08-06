@@ -15,8 +15,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/resources/mvc-dispatcher-servlet.xml")
 public class CommonControllerTest {
     private MockMvc mockMvc;
@@ -27,7 +27,6 @@ public class CommonControllerTest {
 
     @Before
     public void setup() {
-        System.setProperty("data.dir", "123");
         this.mockMvc = webAppContextSetup(this.wac).build();
     }
 

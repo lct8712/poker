@@ -28,7 +28,7 @@ public class PlayerController {
     public @ResponseBody
     String getAll() {
         Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans();
-        return new Gson().toJson(players);
+        return new Gson().toJson(players.values());
     }
 
     @RequestMapping(value = "/search/{name:.+}")

@@ -22,7 +22,7 @@ import com.wandoujia.poker.models.GameInfoBean;
 public class DataDaoFileImpl implements DataDao {
     private static final String COMMENTS_PREFIX = "#";
     private static final Pattern PLAYER_PATTERN = Pattern.compile(" +");
-    private static final String[] DATA_FILE_EXTENSIONS = new String[]{"*.txt"};
+    private static final String[] DATA_FILE_EXTENSIONS = new String[]{"txt"};
 
     private String dataFileDir;
 

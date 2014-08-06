@@ -11,7 +11,7 @@ public class StatisticsUtil {
         for (Double num : data) {
             result += num;
         }
-        return result;
+        return round(result);
     }
 
     public static Double computeMean(List<Double> data) {
@@ -38,6 +38,6 @@ public class StatisticsUtil {
     // Keep 2 digits for num
     private static Double round(double num) {
         int precision = 100;
-        return Math.floor(num * precision +.5)/precision;
+        return Math.floor(num * precision +.5) / precision;
     }
 }
