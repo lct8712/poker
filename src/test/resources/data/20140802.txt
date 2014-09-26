@@ -1,0 +1,7 @@
+xiaohui 31.5
+toy 5
+liangliang 50
+luantao 10
+sunny -50
+yuehui -5
+yanguang -47

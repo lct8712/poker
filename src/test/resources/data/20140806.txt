@@ -1,0 +1,11 @@
+luantao 250
+liangliang 205
+toy 120
+xiaohui 105
+dahai 95
+sunny 42.5
+songge -25
+wuxiaoyue -85
+yanguang -100
+fengjie -110
+yuzhou -500

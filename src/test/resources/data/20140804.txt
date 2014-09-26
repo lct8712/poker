@@ -1,0 +1,8 @@
+toy 15
+liangliang 13
+sunny -12
+songge 110
+yuehui -36.25
+yuzhou -150
+xiaoyue 55
+xiaohui 10
