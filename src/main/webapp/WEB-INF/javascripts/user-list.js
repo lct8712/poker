@@ -13,6 +13,12 @@ $(document).ready( function () {
             { 'data': 'stdDev' },
             { 'data': 'history' }
         ],
+        "paging" : false,
+        "sDom": '<"top">rt<"bottom"flp><"clear">',
+        "rowCallback": function(row, data) {
+            var url = 'user-info.html?id=' + data.name;
+            $('td:eq(0)', row).html('<a href="' + url + '">' + data.name + '</a>');
+        },
         "columnDefs": [
             {
                 "type": "numeric",

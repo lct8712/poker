@@ -62,16 +62,16 @@ public class PokerServiceImpl implements PokerService {
         }
         switch (rankingType) {
             case sum:
-                Collections.sort(result, PlayerDataBean.getSumComparator());
+                Collections.sort(result, new PlayerDataBean.SumComparator());
                 break;
             case count:
-                Collections.sort(result, PlayerDataBean.getCountComparator());
+                Collections.sort(result, new PlayerDataBean.CountComparator());
                 break;
             case mean:
-                Collections.sort(result, PlayerDataBean.getMeanComparator());
+                Collections.sort(result, new PlayerDataBean.MeanComparator());
                 break;
             case stddev:
-                Collections.sort(result, PlayerDataBean.getStdDevComparator());
+                Collections.sort(result, new PlayerDataBean.StdDevComparator());
                 break;
             default:
                 throw new IllegalArgumentException(getSupportTypeDesription());

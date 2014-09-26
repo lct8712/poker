@@ -1,0 +1,20 @@
+body {
+    font-size: 38px;
+    font-family: "Lantinghei SC","Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,Arial,sans-serif
+}
+
+#table-user-info {
+    margin: 0 auto;
+}
+
+th, legend {
+    font-size: 42px;
+}
+
+legend {
+    margin-top: 80px;
+}
+
+.navbar {
+    padding: 10px;
+}

@@ -21,7 +21,7 @@ import com.wandoujia.poker.models.GameInfoBean;
 @Repository
 public class DataDaoFileImpl implements DataDao {
     private static final String COMMENTS_PREFIX = "#";
-    private static final Pattern PLAYER_PATTERN = Pattern.compile(" +");
+    private static final Pattern PLAYER_PATTERN = Pattern.compile("\\s+");
     private static final String[] DATA_FILE_EXTENSIONS = new String[]{"txt"};
 
     private String dataFileDir;
@@ -41,6 +41,7 @@ public class DataDaoFileImpl implements DataDao {
             } catch (ParseException ignored) {
             }
         }
+        Collections.sort(result, new GameInfoBean.DescComparator());
         return result;
     }
 
@@ -55,19 +56,15 @@ public class DataDaoFileImpl implements DataDao {
                 Pair<String, Double> playerInfo = getPlayerInfo(line);
                 if (playerInfo != null) {
                     players.add(playerInfo);
+                } else {
+                    System.out.println("Load game info failed: " + file.getName());
                 }
             }
         }
         Collections.sort(players, new Comparator<Pair<String, Double>>() {
             @Override
             public int compare(Pair<String, Double> p1, Pair<String, Double> p2) {
-                if (p1.snd - p2.snd > 0) {
-                    return 1;
-                } else if (p1.snd - p2.snd < 0) {
-                    return -1;
-                } else {
-                    return 0;
-                }
+                return p2.snd.compareTo(p1.snd);
             }
         });
 

@@ -33,39 +33,31 @@ public class PlayerDataBean {
         stdDev = StatisticsUtil.computeStandardDeviation(history);
     }
 
-    public static Comparator<PlayerDataBean> getSumComparator() {
-        return new Comparator<PlayerDataBean>() {
-            @Override
-            public int compare(PlayerDataBean p1, PlayerDataBean p2) {
-                return p1.getSum().compareTo(p2.getSum());
-            }
-        };
+    public static class SumComparator implements Comparator<PlayerDataBean> {
+        @Override
+        public int compare(PlayerDataBean p1, PlayerDataBean p2) {
+            return p1.getSum().compareTo(p2.getSum());
+        }
     }
 
-    public static Comparator<PlayerDataBean> getCountComparator() {
-        return new Comparator<PlayerDataBean>() {
-            @Override
-            public int compare(PlayerDataBean p1, PlayerDataBean p2) {
-                return Integer.valueOf(p1.history.size()).compareTo(p2.history.size());
-            }
-        };
+    public static class CountComparator implements Comparator<PlayerDataBean> {
+        @Override
+        public int compare(PlayerDataBean p1, PlayerDataBean p2) {
+            return Integer.valueOf(p1.history.size()).compareTo(p2.history.size());
+        }
     }
 
-    public static Comparator<PlayerDataBean> getMeanComparator() {
-        return new Comparator<PlayerDataBean>() {
-            @Override
-            public int compare(PlayerDataBean p1, PlayerDataBean p2) {
-                return p1.getMean().compareTo(p2.getMean());
-            }
-        };
+    public static class MeanComparator implements Comparator<PlayerDataBean> {
+        @Override
+        public int compare(PlayerDataBean p1, PlayerDataBean p2) {
+            return p1.getMean().compareTo(p2.getMean());
+        }
     }
 
-    public static Comparator<PlayerDataBean> getStdDevComparator() {
-        return new Comparator<PlayerDataBean>() {
-            @Override
-            public int compare(PlayerDataBean p1, PlayerDataBean p2) {
-                return p1.getStdDev().compareTo(p2.getStdDev());
-            }
-        };
+    public static class StdDevComparator implements Comparator<PlayerDataBean> {
+        @Override
+        public int compare(PlayerDataBean p1, PlayerDataBean p2) {
+            return p1.getStdDev().compareTo(p2.getStdDev());
+        }
     }
 }

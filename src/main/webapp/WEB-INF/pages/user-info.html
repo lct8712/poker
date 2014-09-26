@@ -9,21 +9,25 @@
     <div class="container">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="user-list.html">玩家列表</a></li>
+                <li><a href="user-list.html">玩家列表</a></li>
                 <li><a href="game-list.html">游戏列表</a></li>
             </ul>
         </div>
     </div>
 </div>
 
-<table id="table-user-list" class="display">
+<div class="jumbotron">
+    <h1 id="user-id"></h1>
+    <h2 id="user-sum"></h2>
+    <h2 id="user-mean"></h2>
+    <h2 id="user-stdDev"></h2>
+    <h2 id="user-num"></h2>
+</div>
+
+<table id="table-user-info" class="display">
     <thead>
     <tr>
-        <th>姓名</th>
-        <th>总和</th>
-        <th>平均</th>
-        <th>标准差</th>
-        <th>次数</th>
+        <th>历史记录</th>
     </tr>
     </thead>
     <tbody>
@@ -33,10 +37,12 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+
 <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="http://static.wdjimg.com/ajax/libs/purl/2.3.1/purl.min.js"></script>
 <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../stylesheets/main.css">
-<script type="text/javascript" charset="utf8" src="../javascripts/user-list.js"></script>
+<script type="text/javascript" charset="utf8" src="../javascripts/user-info.js"></script>
 
 </html>
