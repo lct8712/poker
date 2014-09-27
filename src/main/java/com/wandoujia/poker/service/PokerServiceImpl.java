@@ -1,5 +1,6 @@
 package com.wandoujia.poker.service;
 
+import java.text.ParseException;
 import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
@@ -8,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.sun.tools.javac.util.Pair;
 import com.wandoujia.poker.dao.DataDao;
+import com.wandoujia.poker.models.ApiResult;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.models.PlayerDataBean;
+import com.wandoujia.poker.util.ContentParser;
+import com.wandoujia.poker.util.DateUtil;
 
 /**
  * @author chentian
@@ -20,8 +24,11 @@ public class PokerServiceImpl implements PokerService {
     @Autowired
     private DataDao dataDao;
 
-    private List<GameInfoBean> gameInfoBeans = new ArrayList<GameInfoBean>();
-    private Map<String, PlayerDataBean> playerDataBeans = new HashMap<String, PlayerDataBean>();
+    private List<GameInfoBean> gameInfoBeans;
+
+    private Map<String, PlayerDataBean> playerDataBeans;
+
+    public static final String LINE_DELIMITER = "\n";
 
     enum RankingType {
         sum, count, mean, stddev
@@ -38,6 +45,57 @@ public class PokerServiceImpl implements PokerService {
     public List<GameInfoBean> getGameInfoBeans() {
         tryToReloadData();
         return gameInfoBeans;
+    }
+
+    @Override
+    public GameInfoBean getGameInfoBean(String dateStr) {
+        try {
+            Date date = DateUtil.DATE_FORMATTER.parse(dateStr);
+            for (GameInfoBean gameInfoBean : gameInfoBeans) {
+                if (gameInfoBean.getDate().equals(date)) {
+                    return gameInfoBean;
+                }
+            }
+            return null;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public ApiResult updateGame(String dateStr, String content, String comment) {
+        try {
+            List<Pair<String, Double>> players = new ArrayList<Pair<String, Double>>();
+            String[] lines = content.split(LINE_DELIMITER);
+            for (String line : lines) {
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                Pair<String, Double> playerInfo = ContentParser.getPlayerInfo(line);
+                if (playerInfo != null) {
+                    players.add(playerInfo);
+                } else {
+                    return new ApiResult(false, "Line format error: " + line);
+                }
+            }
+
+            GameInfoBean gameInfoBean = new GameInfoBean();
+            gameInfoBean.setDate(DateUtil.DATE_FORMATTER.parse(dateStr));
+            gameInfoBean.setComments(comment);
+            gameInfoBean.setPlayers(players);
+
+            if (!gameInfoBean.isValidate()) {
+                return new ApiResult(false, "Sum of money is bigger than 10.");
+            }
+            if (!dataDao.updateGameInfo(gameInfoBean)) {
+                return new ApiResult(false, "Update error.");
+            }
+            reloadData();
+            return new ApiResult(true);
+        } catch (ParseException e) {
+            return new ApiResult(false, "Date format error, should be: yyyyMMdd");
+        }
     }
 
     @Override
@@ -90,7 +148,7 @@ public class PokerServiceImpl implements PokerService {
     }
 
     private void tryToReloadData() {
-        if (gameInfoBeans.isEmpty()) {
+        if (gameInfoBeans == null || gameInfoBeans.isEmpty()) {
             reloadData();
         }
     }
@@ -121,6 +179,4 @@ public class PokerServiceImpl implements PokerService {
 
         playerDataBeans.put(pair.fst, player);
     }
-
-    public void setDataDao(DataDao dataDao) { this.dataDao = dataDao; }
 }

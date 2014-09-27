@@ -13,10 +13,15 @@ import com.wandoujia.poker.util.StatisticsUtil;
  */
 @Data
 public class PlayerDataBean {
+
     private String name;
+
     private List<Double> history = new ArrayList<Double>();
+
     private Double sum;
+
     private Double mean;
+
     private Double stdDev;
 
     public PlayerDataBean(String name) {

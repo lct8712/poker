@@ -14,11 +14,19 @@ var fillGameInfo = function (gameInfo, $container) {
     $table.DataTable({
         data: gameInfo.players,
         "aaSorting": [[ 1, "desc" ]],
-        columns: [
+        "bAutoWidth": false,
+        "columns": [
             { data: 'fst' },
             { data: 'snd' }
         ],
+        "paging" : false,
         "columnDefs": [
+            {   "width": "50%",
+                "targets": 0
+            },
+            {   "width": "50%",
+                "targets": 1
+            },
             {
                 "type": "numeric",
                 "targets": [1]
@@ -34,8 +42,7 @@ $(document).ready( function () {
     data: {},
     success : function(resp) {
             console.log('Load data success. ');
-            var gameList = JSON.parse(resp);
-            fillGameList(gameList);
+            fillGameList(resp);
         },
         error : function(resp) {
             console.log('Load data failed. ' + resp);

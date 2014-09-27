@@ -24,21 +24,21 @@ public class PlayerController {
     @Autowired
     private PokerService pokerService;
 
-    @RequestMapping(value = "/all")
+    @RequestMapping(value = "/all", produces = "application/json; charset=utf-8")
     public @ResponseBody
     String getAll() {
         Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans();
         return new Gson().toJson(players.values());
     }
 
-    @RequestMapping(value = "/search/{name:.+}")
+    @RequestMapping(value = "/search/{name:.+}", produces = "application/json; charset=utf-8")
     public @ResponseBody
     String getOne(@PathVariable("name") String name) {
         Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans();
         return new Gson().toJson(players.get(name));
     }
 
-    @RequestMapping(value = "/ranking")
+    @RequestMapping(value = "/ranking", produces = "application/json; charset=utf-8")
     public @ResponseBody
     String ranking(HttpServletRequest request) {
         try {

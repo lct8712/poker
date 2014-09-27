@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="user-list.html">玩家列表</a></li>
+                <li><a href="game-list.html">游戏列表</a></li>
+                <li class="active"><a href="game-update.html">上传数据</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <input id="input-date" type="text" class="form-control form-input" placeholder="日期，如：20140901"/>
+    <textarea id="input-content"  class="form-control form-input" placeholder="每人一行，如：lixian 100"></textarea>
+
+    <button id="submit-game-update" type="submit" class="btn btn-primary form-input">提交</button>
+
+    <label id="error-info" class="form-input"></label>
+</div>
+
+</body>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../stylesheets/main.css">
+
+<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="../javascripts/game-update.js"></script>
+
+</html>

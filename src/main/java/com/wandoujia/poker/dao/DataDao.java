@@ -9,5 +9,8 @@ import com.wandoujia.poker.models.GameInfoBean;
  * Get data from file
  */
 public interface DataDao {
+
     List<GameInfoBean> loadGameInfos();
+
+    boolean updateGameInfo(GameInfoBean gameInfoBean);
 }

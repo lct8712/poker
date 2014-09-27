@@ -23,6 +23,7 @@ poker
 /api/player/ranking?type={sum,count,mean,stddev}
 
 /api/game/all
-/api/game/
+/api/game/search/{date}
+/api/game/update
 
 /api/reload

@@ -5,22 +5,25 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.wandoujia.poker.dao.DataDaoFileImpl;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.models.PlayerDataBean;
 
 import static org.junit.Assert.assertFalse;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/test/resources/mvc-dispatcher-servlet.xml")
 public class PokerServiceImplTest {
-    private static final String DATA_FILE_DIR = "/Users/lingchentian/Documents/Github/poker/src/test/resources/data";
-    private DataDaoFileImpl fileDao = new DataDaoFileImpl();
-    private PokerServiceImpl pokerService = new PokerServiceImpl();
+
+    @Autowired
+    private PokerServiceImpl pokerService;
 
     @Before
     public void init() {
-        fileDao.setDataFileDir(DATA_FILE_DIR);
-        pokerService.setDataDao(fileDao);
         pokerService.reloadData();
     }
 

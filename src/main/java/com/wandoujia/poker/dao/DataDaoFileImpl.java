@@ -1,18 +1,18 @@
 package com.wandoujia.poker.dao;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sun.tools.javac.util.Pair;
 import com.wandoujia.poker.models.GameInfoBean;
+import com.wandoujia.poker.util.ContentParser;
+import com.wandoujia.poker.util.DateUtil;
 
 /**
  * @author chentian
@@ -20,10 +20,12 @@ import com.wandoujia.poker.models.GameInfoBean;
  */
 @Repository
 public class DataDaoFileImpl implements DataDao {
+
     private static final String COMMENTS_PREFIX = "#";
-    private static final Pattern PLAYER_PATTERN = Pattern.compile("\\s+");
+
     private static final String[] DATA_FILE_EXTENSIONS = new String[]{"txt"};
 
+    @Autowired
     private String dataFileDir;
 
     @Override
@@ -45,15 +47,36 @@ public class DataDaoFileImpl implements DataDao {
         return result;
     }
 
+    @Override
+    public boolean updateGameInfo(GameInfoBean gameInfoBean) {
+        String fileName = DateUtil.DATE_FORMATTER.format(gameInfoBean.getDate()) + ".txt";
+        PrintWriter writer;
+        try {
+            writer = new PrintWriter(dataFileDir + "/" + fileName, "UTF-8");
+            if (!gameInfoBean.getComments().isEmpty()) {
+                writer.println("# " + gameInfoBean.getComments());
+            }
+            for (Pair<String, Double> player : gameInfoBean.getPlayers()) {
+                writer.println(player.fst + "\t" + player.snd);
+            }
+            writer.close();
+        } catch (FileNotFoundException e) {
+            return false;
+        } catch (UnsupportedEncodingException e) {
+            return false;
+        }
+        return true;
+    }
+
     private GameInfoBean readGameInfoBeanFromFile(File file) throws IOException, ParseException {
-        Date date = (new SimpleDateFormat("yyyyMMdd")).parse(file.getName());
+        Date date = DateUtil.DATE_FORMATTER.parse(file.getName());
         StringBuilder comments = new StringBuilder();
         List<Pair<String, Double>> players = new ArrayList<Pair<String, Double>>();
         for (String line : FileUtils.readLines(file)) {
             if (line.startsWith(COMMENTS_PREFIX)) {
                 comments.append(line);
             } else {
-                Pair<String, Double> playerInfo = getPlayerInfo(line);
+                Pair<String, Double> playerInfo = ContentParser.getPlayerInfo(line);
                 if (playerInfo != null) {
                     players.add(playerInfo);
                 } else {
@@ -75,19 +98,4 @@ public class DataDaoFileImpl implements DataDao {
         return result;
     }
 
-    private Pair<String, Double> getPlayerInfo(String line) {
-        String[] items = PLAYER_PATTERN.split(line);
-        if (items.length != 2) {
-            return null;
-        }
-        try {
-            return new Pair<String, Double>(items[0].trim(), Double.valueOf(items[1]));
-        } catch (NumberFormatException e) {
-            return null;
-        }
-    }
-
-    public void setDataFileDir(String dataFileDir) {
-        this.dataFileDir = dataFileDir;
-    }
 }

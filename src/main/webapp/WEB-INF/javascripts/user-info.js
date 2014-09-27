@@ -19,8 +19,7 @@ $(document).ready( function () {
     data: {},
     success : function(resp) {
             console.log('Load data success. ' + resp);
-            var userInfo = JSON.parse(resp);
-            fillUserInfo(userInfo);
+            fillUserInfo(resp);
         },
         error : function(resp) {
             console.log('Load data failed. ' + resp);
