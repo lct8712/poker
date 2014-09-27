@@ -13,7 +13,7 @@ import com.wandoujia.poker.models.ApiResult;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.models.PlayerDataBean;
 import com.wandoujia.poker.util.ContentParser;
-import com.wandoujia.poker.util.DateUtil1;
+import com.wandoujia.poker.util.DateUtil;
 
 /**
  * @author chentian
@@ -50,7 +50,7 @@ public class PokerServiceImpl implements PokerService {
     @Override
     public GameInfoBean getGameInfoBean(String dateStr) {
         try {
-            Date date = DateUtil1.DATE_FORMATTER.parse(dateStr);
+            Date date = DateUtil.DATE_FORMATTER.parse(dateStr);
             for (GameInfoBean gameInfoBean : gameInfoBeans) {
                 if (gameInfoBean.getDate().equals(date)) {
                     return gameInfoBean;
@@ -81,7 +81,7 @@ public class PokerServiceImpl implements PokerService {
             }
 
             GameInfoBean gameInfoBean = new GameInfoBean();
-            gameInfoBean.setDate(DateUtil1.DATE_FORMATTER.parse(dateStr));
+            gameInfoBean.setDate(DateUtil.DATE_FORMATTER.parse(dateStr));
             gameInfoBean.setComments(comment);
             gameInfoBean.setPlayers(players);
 

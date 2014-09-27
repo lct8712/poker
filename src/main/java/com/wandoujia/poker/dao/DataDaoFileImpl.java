@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.sun.tools.javac.util.Pair;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.util.ContentParser;
-import com.wandoujia.poker.util.DateUtil1;
+import com.wandoujia.poker.util.DateUtil;
 
 /**
  * @author chentian
@@ -49,7 +49,7 @@ public class DataDaoFileImpl implements DataDao {
 
     @Override
     public boolean updateGameInfo(GameInfoBean gameInfoBean) {
-        String fileName = DateUtil1.DATE_FORMATTER.format(gameInfoBean.getDate()) + ".txt";
+        String fileName = DateUtil.DATE_FORMATTER.format(gameInfoBean.getDate()) + ".txt";
         PrintWriter writer;
         try {
             writer = new PrintWriter(dataFileDir + "/" + fileName, "UTF-8");
@@ -69,7 +69,7 @@ public class DataDaoFileImpl implements DataDao {
     }
 
     private GameInfoBean readGameInfoBeanFromFile(File file) throws IOException, ParseException {
-        Date date = DateUtil1.DATE_FORMATTER.parse(file.getName());
+        Date date = DateUtil.DATE_FORMATTER.parse(file.getName());
         StringBuilder comments = new StringBuilder();
         List<Pair<String, Double>> players = new ArrayList<Pair<String, Double>>();
         for (String line : FileUtils.readLines(file)) {
