@@ -1,0 +1,14 @@
+# 周三
+zhida       508
+toy         75
+zhangcheng  100
+liangliang  46.75
+lixian      26
+luantao     3.5
+chentian    5
+xiaohui     -25
+xiaoyue     -48.5
+minjin      -50
+yanguang    -100
+sunny       -133.75
+yuzhou      -400.5

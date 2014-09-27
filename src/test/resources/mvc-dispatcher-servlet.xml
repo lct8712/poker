@@ -20,7 +20,7 @@
     </bean>
 
     <bean id="dataDao" class="java.lang.String">
-        <constructor-arg value="${data.dir}"/>
+        <constructor-arg value="/Users/lingchentian/Documents/Github/poker/src/test/resources/data"/>
     </bean>
 
 </beans>

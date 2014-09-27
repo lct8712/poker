@@ -1,0 +1,9 @@
+# 周三
+liangliang  75
+lixian      59
+toy         40
+chentian    25
+luantao     6.25
+yuzhou      -47.5
+sunny       -59.25
+xiaohui     -100

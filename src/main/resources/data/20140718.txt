@@ -1,0 +1,12 @@
+# 周五
+yuzhou      162.5
+liangliang  160
+xiaoyue     115
+dahai       110
+sunny       35
+yanguang    -25
+yuehui      -25
+lixian      -81.5
+zanzhi      -100
+toy         -150
+zhida       -200

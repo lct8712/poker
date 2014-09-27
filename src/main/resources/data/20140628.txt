@@ -1,0 +1,10 @@
+# 周六
+yanguang    430
+yuehui      178
+toy         105
+liangliang  -20.25
+sunny       -50
+xiaoyue     -100
+luantao     -100
+zhida       -142
+yuzhou      -300
