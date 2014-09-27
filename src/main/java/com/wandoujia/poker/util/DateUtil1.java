@@ -5,6 +5,6 @@ import java.text.SimpleDateFormat;
 /**
  * @author chentian
  */
-public class DateUtil {
+public class DateUtil1 {
     public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyyMMdd");
 }

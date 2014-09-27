@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.wandoujia.poker.models.GameInfoBean;
-import com.wandoujia.poker.util.DateUtil;
+import com.wandoujia.poker.util.DateUtil1;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/test/resources/mvc-dispatcher-servlet.xml")
@@ -26,7 +26,7 @@ public class DataDaoFileImplTest {
 
         for (GameInfoBean gameInfo : gameInfos) {
             if (!gameInfo.isValidate()) {
-                System.out.println(DateUtil.DATE_FORMATTER.format(gameInfo.getDate()));
+                System.out.println(DateUtil1.DATE_FORMATTER.format(gameInfo.getDate()));
                 System.out.println(gameInfo.computeSum());
             }
 //            Assert.assertTrue(gameInfo.isValidate());
