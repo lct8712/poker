@@ -18,12 +18,12 @@ poker
 - 每次的数据是一个文件
 
 # 接口
-/api/player/all
-/api/player/search/{username}
-/api/player/ranking?type={sum,count,mean,stddev}
+- /api/player/all
+- /api/player/search/{username}
+- /api/player/ranking?type={sum,count,mean,stddev}
 
-/api/game/all
-/api/game/search/{date}
-/api/game/update
+- /api/game/all
+- /api/game/search/{date}
+- /api/game/update
 
-/api/reload
+- /api/reload
