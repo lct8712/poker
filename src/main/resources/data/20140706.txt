@@ -5,7 +5,7 @@ yuehui      224
 toy         175
 lixian      30
 xiaohui     -100
-luantao     -91
+luantao     -220
 chentian    -175
 zhida       -25
 sunny       -150
