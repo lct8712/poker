@@ -1,14 +1,17 @@
 package com.wandoujia.poker.models;
 
-import com.google.gdata.util.common.base.Pair;
-
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
+
+import com.google.gdata.util.common.base.Pair;
+
 /**
  * @author chentian
  */
+@Data
 public class GameInfoBean {
 
     public static final double ERROR_EXCEPTED = 10.0;
@@ -36,30 +39,6 @@ public class GameInfoBean {
         public int compare(GameInfoBean gameInfoBean, GameInfoBean gameInfoBean2) {
             return gameInfoBean2.getDate().compareTo(gameInfoBean.getDate());
         }
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    public List<Pair<String, Double>> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<Pair<String, Double>> players) {
-        this.players = players;
     }
 
     @Override

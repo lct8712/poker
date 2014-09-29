@@ -1,9 +1,12 @@
 package com.wandoujia.poker.models;
 
 
+import lombok.Data;
+
 /**
  * @author chentian
  */
+@Data
 public class ApiResult {
 
     private boolean isSuccess;
@@ -16,22 +19,6 @@ public class ApiResult {
 
     public ApiResult(boolean isSuccess, String errorInfo) {
         this.isSuccess = isSuccess;
-        this.errorInfo = errorInfo;
-    }
-
-    public boolean isSuccess() {
-        return isSuccess;
-    }
-
-    public void setSuccess(boolean isSuccess) {
-        this.isSuccess = isSuccess;
-    }
-
-    public String getErrorInfo() {
-        return errorInfo;
-    }
-
-    public void setErrorInfo(String errorInfo) {
         this.errorInfo = errorInfo;
     }
 
