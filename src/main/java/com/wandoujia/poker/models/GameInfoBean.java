@@ -31,7 +31,7 @@ public class GameInfoBean {
     }
 
     public boolean isValidate() {
-        return computeSum() <= ERROR_EXCEPTED;
+        return Math.abs(computeSum()) <= ERROR_EXCEPTED;
     }
 
     public static class DescComparator implements Comparator<GameInfoBean> {
