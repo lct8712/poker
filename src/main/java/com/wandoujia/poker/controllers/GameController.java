@@ -1,14 +1,15 @@
 package com.wandoujia.poker.controllers;
 
-import com.google.gson.Gson;
-import com.wandoujia.poker.models.ApiResult;
-import com.wandoujia.poker.models.GameInfoBean;
-import com.wandoujia.poker.service.PokerService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.google.gson.Gson;
+import com.wandoujia.poker.models.ApiResult;
+import com.wandoujia.poker.models.GameInfoBean;
+import com.wandoujia.poker.service.PokerService;
 
 /**
  * @author chentian
@@ -16,13 +17,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/game")
 public class GameController {
+
     @Autowired
     private PokerService pokerService;
 
-    @RequestMapping(value = "/all", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/all", params = {"season"},
+            produces = "application/json; charset=utf-8")
     public @ResponseBody
-    String getAll() {
-        List<GameInfoBean> games = pokerService.getGameInfoBeans();
+    String getAll(@RequestParam(value = "season", required = true) String season) {
+        List<GameInfoBean> games = pokerService.getGameInfoBeans(season);
         return new Gson().toJson(games);
     }
 

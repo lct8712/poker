@@ -31,19 +31,22 @@ public class DataDaoFileImpl implements DataDao {
     private String dataFileDir;
 
     @Override
-    public List<GameInfoBean> loadGameInfos() {
+    public List<GameInfoBean> loadGameInfos(String seasonNumber) {
 
-        AtomicReference<File> dataDirectory = new AtomicReference<File>(new File(this.dataFileDir));
+        AtomicReference<File> dataDirectory = new AtomicReference<>(new File(this.dataFileDir));
         if (!dataDirectory.get().exists()) {
             return Collections.emptyList();
         }
 
-        List<GameInfoBean> result = new ArrayList<GameInfoBean>();
+        List<GameInfoBean> result = new ArrayList<>();
         for (File file : FileUtils.listFiles(dataDirectory.get(), DATA_FILE_EXTENSIONS, false)) {
+            if (!DateUtil.isDateInSeason(file.getName(), seasonNumber)) {
+                continue;
+            }
+
             try {
                 result.add(readGameInfoBeanFromFile(file));
-            } catch (IOException ignored) {
-            } catch (ParseException ignored) {
+            } catch (IOException | ParseException ignored) {
             }
         }
         Collections.sort(result, new GameInfoBean.DescComparator());
@@ -76,7 +79,7 @@ public class DataDaoFileImpl implements DataDao {
     private GameInfoBean readGameInfoBeanFromFile(File file) throws IOException, ParseException {
         Date date = DateUtil.DATE_FORMATTER.parse(file.getName());
         StringBuilder comments = new StringBuilder();
-        List<Pair<String, Double>> players = new ArrayList<Pair<String, Double>>();
+        List<Pair<String, Double>> players = new ArrayList<>();
         for (String line : FileUtils.readLines(file)) {
             if (line.startsWith(COMMENTS_PREFIX)) {
                 comments.append(line);

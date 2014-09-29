@@ -16,7 +16,9 @@ public class PlayerDataBean {
 
     private String name;
 
-    private List<Double> history = new ArrayList<Double>();
+    private List<String> historyDate = new ArrayList<>();
+
+    private List<Double> historyMoney = new ArrayList<>();
 
     private Double sum;
 
@@ -29,13 +31,13 @@ public class PlayerDataBean {
     }
 
     public void compute() {
-        if (history.isEmpty()) {
+        if (historyMoney.isEmpty()) {
             return;
         }
 
-        sum = StatisticsUtil.computeSum(history);
-        mean = StatisticsUtil.computeMean(history);
-        stdDev = StatisticsUtil.computeStandardDeviation(history);
+        sum = StatisticsUtil.computeSum(historyMoney);
+        mean = StatisticsUtil.computeMean(historyMoney);
+        stdDev = StatisticsUtil.computeStandardDeviation(historyMoney);
     }
 
     public static class SumComparator implements Comparator<PlayerDataBean> {
@@ -48,7 +50,7 @@ public class PlayerDataBean {
     public static class CountComparator implements Comparator<PlayerDataBean> {
         @Override
         public int compare(PlayerDataBean p1, PlayerDataBean p2) {
-            return Integer.valueOf(p1.history.size()).compareTo(p2.history.size());
+            return Integer.valueOf(p1.historyMoney.size()).compareTo(p2.historyMoney.size());
         }
     }
 
@@ -70,7 +72,7 @@ public class PlayerDataBean {
     public String toString() {
         return "PlayerDataBean{" +
                 "name='" + name + '\'' +
-                ", history=" + history +
+                ", historyMoney=" + historyMoney +
                 ", sum=" + sum +
                 ", mean=" + mean +
                 ", stdDev=" + stdDev +

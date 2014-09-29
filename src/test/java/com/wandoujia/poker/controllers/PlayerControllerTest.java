@@ -31,13 +31,17 @@ public class PlayerControllerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        mockMvc.perform(get("/api/player/all"))
+        mockMvc.perform(get("/api/player/all?season=1"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testGetOne() throws Exception {
-        mockMvc.perform(get("/api/player/search/chentian"))
+        mockMvc.perform(get("/api/player/search/chentian?season=1"))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/api/player/search/chentian?season=2"))
+                .andExpect(status().isOk());
+        mockMvc.perform(get("/api/player/search/chentian?season=3"))
                 .andExpect(status().isOk());
     }
 }

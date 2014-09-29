@@ -37,10 +37,18 @@ var fillGameInfo = function (gameInfo, $container) {
 };
 
 $(document).ready( function () {
+    var season = $.url().param('season');
+    if (season === undefined || season.size === 0) {
+        window.location.replace("index.html");
+        return;
+    }
+
     $.ajax({
         url : "api/game/all",
-    data: {},
-    success : function(resp) {
+        data: {
+            season : season
+        },
+        success : function(resp) {
             console.log('Load data success. ');
             fillGameList(resp);
         },

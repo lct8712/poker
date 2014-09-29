@@ -14,13 +14,13 @@ public interface PokerService {
 
     boolean reloadData();
 
-    List<GameInfoBean> getGameInfoBeans();
+    List<GameInfoBean> getGameInfoBeans(String seasonName);
 
     GameInfoBean getGameInfoBean(String date);
 
     ApiResult updateGame(String date, String content, String comment);
 
-    Map<String, PlayerDataBean> getPlayerDataBeans();
+    Map<String, PlayerDataBean> getPlayerDataBeans(String seasonName);
 
-    List<PlayerDataBean> getPlayerWithRanking(String type);
+    List<PlayerDataBean> getPlayerWithRanking(String type, String seasonName);
 }

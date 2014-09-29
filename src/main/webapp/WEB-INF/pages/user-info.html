@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+    <title>玩家数据 - 豌豆荚德州扑克</title>
 </head>
 <body>
 
@@ -9,9 +10,10 @@
     <div class="container">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="user-list.html">玩家列表</a></li>
-                <li><a href="game-list.html">游戏列表</a></li>
-                <li><a href="game-update.html">上传数据</a></li>
+                <li><a href="index.html" class="logo"></a></li>
+                <li><a href="#" id="href-user-list">玩家列表</a></li>
+                <li><a href="#" id="href-game-list">游戏列表</a></li>
+                <li><a href="#" id="href-game-update">上传数据</a></li>
             </ul>
         </div>
     </div>
@@ -25,15 +27,18 @@
     <h2 id="user-num"></h2>
 </div>
 
-<table id="table-user-info" class="display">
-    <thead>
-    <tr>
-        <th>历史记录</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class="container">
+    <table id="table-user-info" class="display table ">
+        <thead>
+        <tr>
+            <th>日期</th>
+            <th>战绩</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 </body>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -43,6 +48,7 @@
 <script type="text/javascript" charset="utf8" src="http://static.wdjimg.com/ajax/libs/purl/2.3.1/purl.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../stylesheets/main.css">
+<script type="text/javascript" charset="utf8" src="../javascripts/redirect.js"></script>
 <script type="text/javascript" charset="utf8" src="../javascripts/user-info.js"></script>
 
 </html>
