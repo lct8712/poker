@@ -8,6 +8,7 @@ import java.util.Map;
 import lombok.Data;
 
 import com.google.gdata.util.common.base.Pair;
+import com.wandoujia.poker.util.DateUtil;
 
 /**
  * @author chentian
@@ -31,8 +32,9 @@ public class SeasonInfoBean {
     public void parsePlayers() {
         playerDataBeans = new HashMap<>();
         for (GameInfoBean gameInfo : gameInfoBeans) {
+            String date = DateUtil.DATE_FORMATTER.format(gameInfo.getDate());
             for (Pair<String, Double> pair : gameInfo.getPlayers()) {
-                updatePlayer(pair);
+                updatePlayer(pair.getFirst(), pair.getSecond(), date);
             }
         }
         for (PlayerDataBean playerDataBean : playerDataBeans.values()) {
@@ -40,18 +42,17 @@ public class SeasonInfoBean {
         }
     }
 
-    private void updatePlayer(Pair<String, Double> pair) {
+    private void updatePlayer(String name, Double money, String date) {
         PlayerDataBean player;
-        if (playerDataBeans.containsKey(pair.getFirst())) {
-            player = playerDataBeans.get(pair.getFirst());
+        if (playerDataBeans.containsKey(name)) {
+            player = playerDataBeans.get(name);
         } else {
-            player = new PlayerDataBean(pair.getFirst());
+            player = new PlayerDataBean(name);
         }
 
-        List<Double> history = player.getHistory();
-        history.add(pair.getSecond());
-        player.setHistory(history);
+        player.getHistoryDate().add(date);
+        player.getHistoryMoney().add(money);
 
-        playerDataBeans.put(pair.getFirst(), player);
+        playerDataBeans.put(name, player);
     }
 }

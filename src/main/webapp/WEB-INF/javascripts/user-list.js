@@ -36,7 +36,7 @@ $(document).ready( function () {
             {
                 "targets": 4,
                 "render": function (data, type, full) {
-                    return full.history.length;
+                    return full.historyDate.length;
             }
         } ]
     } );

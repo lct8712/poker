@@ -37,7 +37,7 @@ public class PokerServiceImplTest {
         for (PlayerDataBean player : players.values()) {
             System.out.printf("%s\t%.2f\t%.2f\t%.2f\t%d\n",
                     player.getName(), player.getSum(), player.getMean(),
-                    player.getStdDev(), player.getHistory().size());
+                    player.getStdDev(), player.getHistoryMoney().size());
         }
     }
 
