@@ -16,7 +16,7 @@ import com.wandoujia.poker.models.PlayerDataBean;
 import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/test/resources/mvc-dispatcher-servlet.xml")
+@ContextConfiguration("file:src/main/resources/mvc-dispatcher-servlet.xml")
 public class PokerServiceImplTest {
 
     @Autowired
