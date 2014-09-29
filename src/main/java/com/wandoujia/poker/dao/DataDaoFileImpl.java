@@ -7,7 +7,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.google.gdata.util.common.base.Pair;
 import com.wandoujia.poker.models.GameInfoBean;
@@ -16,9 +17,9 @@ import com.wandoujia.poker.util.DateUtil;
 
 /**
  * @author chentian
- * Read data from local file
+ *         Read data from local file
  */
-@Repository
+@Service
 public class DataDaoFileImpl implements DataDao {
 
     private static final String COMMENTS_PREFIX = "#";
@@ -26,10 +27,12 @@ public class DataDaoFileImpl implements DataDao {
     private static final String[] DATA_FILE_EXTENSIONS = new String[]{"txt"};
 
     @Autowired
+    @Qualifier("dataFileDir")
     private String dataFileDir;
 
     @Override
     public List<GameInfoBean> loadGameInfos() {
+
         AtomicReference<File> dataDirectory = new AtomicReference<File>(new File(this.dataFileDir));
         if (!dataDirectory.get().exists()) {
             return Collections.emptyList();
@@ -52,7 +55,7 @@ public class DataDaoFileImpl implements DataDao {
         String fileName = DateUtil.DATE_FORMATTER.format(gameInfoBean.getDate()) + ".txt";
         PrintWriter writer;
         try {
-            writer = new PrintWriter(dataFileDir + "/" + fileName, "UTF-8");
+            writer = new PrintWriter(this.dataFileDir + "/" + fileName, "UTF-8");
             if (!gameInfoBean.getComments().isEmpty()) {
                 writer.println("# " + gameInfoBean.getComments());
             }
@@ -63,6 +66,8 @@ public class DataDaoFileImpl implements DataDao {
         } catch (FileNotFoundException e) {
             return false;
         } catch (UnsupportedEncodingException e) {
+            return false;
+        } catch (NullPointerException e) {
             return false;
         }
         return true;

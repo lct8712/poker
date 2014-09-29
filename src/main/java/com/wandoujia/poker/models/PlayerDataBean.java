@@ -1,17 +1,14 @@
 package com.wandoujia.poker.models;
 
+import com.wandoujia.poker.util.StatisticsUtil;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import lombok.Data;
-
-import com.wandoujia.poker.util.StatisticsUtil;
-
 /**
  * @author chentian
  */
-@Data
 public class PlayerDataBean {
 
     private String name;
@@ -64,5 +61,56 @@ public class PlayerDataBean {
         public int compare(PlayerDataBean p1, PlayerDataBean p2) {
             return p1.getStdDev().compareTo(p2.getStdDev());
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Double> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<Double> history) {
+        this.history = history;
+    }
+
+    public Double getSum() {
+        return sum;
+    }
+
+    public void setSum(Double sum) {
+        this.sum = sum;
+    }
+
+    public Double getMean() {
+        return mean;
+    }
+
+    public void setMean(Double mean) {
+        this.mean = mean;
+    }
+
+    public Double getStdDev() {
+        return stdDev;
+    }
+
+    public void setStdDev(Double stdDev) {
+        this.stdDev = stdDev;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerDataBean{" +
+                "name='" + name + '\'' +
+                ", history=" + history +
+                ", sum=" + sum +
+                ", mean=" + mean +
+                ", stdDev=" + stdDev +
+                '}';
     }
 }

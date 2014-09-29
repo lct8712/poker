@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/resources/mvc-dispatcher-servlet.xml")
+@ContextConfiguration(locations = { "classpath:applicationContext-poker.xml" })
 public class PlayerControllerTest {
     private MockMvc mockMvc;
 

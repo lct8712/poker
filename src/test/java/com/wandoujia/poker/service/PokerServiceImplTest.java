@@ -15,8 +15,8 @@ import com.wandoujia.poker.models.PlayerDataBean;
 
 import static org.junit.Assert.assertFalse;
 
+@ContextConfiguration(locations = { "classpath:applicationContext-poker.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/resources/mvc-dispatcher-servlet.xml")
 public class PokerServiceImplTest {
 
     @Autowired

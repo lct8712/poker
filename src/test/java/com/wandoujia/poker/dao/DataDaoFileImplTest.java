@@ -12,8 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.util.DateUtil;
 
+@ContextConfiguration(locations = { "classpath:applicationContext-poker.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/resources/mvc-dispatcher-servlet.xml")
 public class DataDaoFileImplTest {
 
     @Autowired
@@ -22,7 +22,7 @@ public class DataDaoFileImplTest {
     @Test
     public void testLoadGameInfos() throws Exception {
         List<GameInfoBean> gameInfos = dataDao.loadGameInfos();
-        Assert.assertEquals(67, gameInfos.size());
+        Assert.assertEquals(68, gameInfos.size());
 
         for (GameInfoBean gameInfo : gameInfos) {
             if (!gameInfo.isValidate()) {

@@ -1,9 +1,0 @@
-zhiyong 130.00
-chentian    45.00
-dahai   40.00
-luantao 175.00
-toy -87.50
-machao  -50.00
-yuehui  0.00
-sunny   -200.00
-rongxing    -50.00

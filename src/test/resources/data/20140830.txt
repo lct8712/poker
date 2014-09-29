@@ -1,9 +1,0 @@
-toy 35
-xiaohui 481
-chentian 100
-zhiyong -140
-luantao 25
-yanguang -70
-xiaoqing -34
-yuzhou -300
-zhida -146.5

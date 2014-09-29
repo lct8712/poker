@@ -1,9 +1,0 @@
-yuzhou  -500
-ruirui  75
-liuhuan -77.5
-jiyang  117.5
-sunny    0
-zhiyong 190
-dahai   240
-zhida   -90
-luantao 42.5

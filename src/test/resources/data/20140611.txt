@@ -1,9 +1,0 @@
-# 周三加场
-chentian    55
-toy         0
-songge      96
-lixian      57
-zhida       -153.5
-xiaohui     -17
-luantao     -17.5
-sunny       -20

@@ -1,8 +1,0 @@
-luantao 365
-zhiyong 288.5
-songge 88.5
-sunny 32.5
-yuehui -50
-toy -90
-xiaohui -235
-yuzhou -400

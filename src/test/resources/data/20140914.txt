@@ -1,9 +1,0 @@
-# 银行少了一个买入，赢的前 5 个人平分减掉
-toy  205
-zhiyong  200
-dahai  170
-sunny  -25
-yuzhou  -50
-chentian  -75
-yuehui  -137
-xiaohui  -281.5

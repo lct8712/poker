@@ -16,8 +16,8 @@ var fillGameInfo = function (gameInfo, $container) {
         "aaSorting": [[ 1, "desc" ]],
         "bAutoWidth": false,
         "columns": [
-            { data: 'fst' },
-            { data: 'snd' }
+            { data: 'first' },
+            { data: 'second' }
         ],
         "paging" : false,
         "columnDefs": [
