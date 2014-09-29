@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sun.tools.javac.util.Pair;
+import com.google.gdata.util.common.base.Pair;
 import com.wandoujia.poker.dao.DataDao;
 import com.wandoujia.poker.models.ApiResult;
 import com.wandoujia.poker.models.GameInfoBean;
@@ -167,16 +167,16 @@ public class PokerServiceImpl implements PokerService {
 
     private void updatePlayer(Pair<String, Double> pair) {
         PlayerDataBean player;
-        if (playerDataBeans.containsKey(pair.fst)) {
-            player = playerDataBeans.get(pair.fst);
+        if (playerDataBeans.containsKey(pair.getFirst())) {
+            player = playerDataBeans.get(pair.getFirst());
         } else {
-            player = new PlayerDataBean(pair.fst);
+            player = new PlayerDataBean(pair.getFirst());
         }
 
         List<Double> history = player.getHistory();
-        history.add(pair.snd);
+        history.add(pair.getSecond());
         player.setHistory(history);
 
-        playerDataBeans.put(pair.fst, player);
+        playerDataBeans.put(pair.getFirst(), player);
     }
 }

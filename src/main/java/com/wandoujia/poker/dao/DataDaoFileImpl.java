@@ -9,7 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sun.tools.javac.util.Pair;
+import com.google.gdata.util.common.base.Pair;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.util.ContentParser;
 import com.wandoujia.poker.util.DateUtil;
@@ -57,7 +57,7 @@ public class DataDaoFileImpl implements DataDao {
                 writer.println("# " + gameInfoBean.getComments());
             }
             for (Pair<String, Double> player : gameInfoBean.getPlayers()) {
-                writer.println(player.fst + "\t" + player.snd);
+                writer.println(player.getFirst() + "\t" + player.getSecond());
             }
             writer.close();
         } catch (FileNotFoundException e) {
@@ -87,7 +87,7 @@ public class DataDaoFileImpl implements DataDao {
         Collections.sort(players, new Comparator<Pair<String, Double>>() {
             @Override
             public int compare(Pair<String, Double> p1, Pair<String, Double> p2) {
-                return p2.snd.compareTo(p1.snd);
+                return p2.getSecond().compareTo(p1.getSecond());
             }
         });
 

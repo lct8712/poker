@@ -6,7 +6,7 @@ import java.util.List;
 
 import lombok.Data;
 
-import com.sun.tools.javac.util.Pair;
+import com.google.gdata.util.common.base.Pair;
 
 /**
  * @author chentian
@@ -25,7 +25,7 @@ public class GameInfoBean {
     public Double computeSum() {
         Double sum = 0.0;
         for (Pair<String, Double> player : players) {
-            sum += player.snd;
+            sum += player.getSecond();
         }
         return sum;
     }

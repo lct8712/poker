@@ -2,7 +2,7 @@ package com.wandoujia.poker.util;
 
 import java.util.regex.Pattern;
 
-import com.sun.tools.javac.util.Pair;
+import com.google.gdata.util.common.base.Pair;
 
 /**
  * @author chentian
