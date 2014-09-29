@@ -1,17 +1,18 @@
 package com.wandoujia.poker.controllers;
 
-import com.google.gson.Gson;
-import com.wandoujia.poker.models.PlayerDataBean;
-import com.wandoujia.poker.service.PokerService;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
+import com.google.gson.Gson;
+import com.wandoujia.poker.models.PlayerDataBean;
+import com.wandoujia.poker.service.PokerService;
 
 /**
  * @author chentian
@@ -19,28 +20,34 @@ import java.util.Map;
 @Controller
 @RequestMapping("/api/player")
 public class PlayerController {
+
     @Autowired
     private PokerService pokerService;
 
-    @RequestMapping(value = "/all", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/all", params = {"season"},
+            produces = "application/json; charset=utf-8")
     public @ResponseBody
-    String getAll() {
-        Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans();
+    String getAll(@RequestParam(value = "season", required = true) String season) {
+        Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans(season);
         return new Gson().toJson(players.values());
     }
 
-    @RequestMapping(value = "/search/{name:.+}", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/search/{name:.+}", params = {"season"},
+            produces = "application/json; charset=utf-8")
     public @ResponseBody
-    String getOne(@PathVariable("name") String name) {
-        Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans();
+    String getOne(@PathVariable("name") String name,
+                  @RequestParam(value = "season", required = true) String season) {
+        Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans(season);
         return new Gson().toJson(players.get(name));
     }
 
-    @RequestMapping(value = "/ranking", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/ranking", params = {"type", "season"},
+            produces = "application/json; charset=utf-8")
     public @ResponseBody
-    String ranking(HttpServletRequest request) {
+    String ranking(@RequestParam(value = "type", required = true) String type,
+                   @RequestParam(value = "season", required = true) String season) {
         try {
-            List<PlayerDataBean> players = pokerService.getPlayerWithRanking(request.getParameter("type"));
+            List<PlayerDataBean> players = pokerService.getPlayerWithRanking(type, season);
             return new Gson().toJson(players);
         } catch (IllegalArgumentException e) {
             return "usage: type = " + e.getMessage();

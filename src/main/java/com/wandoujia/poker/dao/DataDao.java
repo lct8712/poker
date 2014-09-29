@@ -10,7 +10,7 @@ import com.wandoujia.poker.models.GameInfoBean;
  */
 public interface DataDao {
 
-    List<GameInfoBean> loadGameInfos();
+    List<GameInfoBean> loadGameInfos(String seasonNumber);
 
     boolean updateGameInfo(GameInfoBean gameInfoBean);
 }

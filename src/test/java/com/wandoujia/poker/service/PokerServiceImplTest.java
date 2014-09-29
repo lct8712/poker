@@ -29,9 +29,9 @@ public class PokerServiceImplTest {
 
     @Test
     public void testGetGameInfoBeans() throws Exception {
-        List<GameInfoBean> games = pokerService.getGameInfoBeans();
+        List<GameInfoBean> games = pokerService.getGameInfoBeans("1");
         assertFalse(games.isEmpty());
-        Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans();
+        Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans("1");
         assertFalse(players.isEmpty());
 
         for (PlayerDataBean player : players.values()) {

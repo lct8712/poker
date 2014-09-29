@@ -13,10 +13,17 @@ var fillUserInfo = function (userInfo) {
 
 $(document).ready( function () {
     var userId = $.url().param('id');
+    var season = $.url().param('season');
+    if (season === undefined || season.size === 0) {
+        window.location.replace("index.html");
+        return;
+    }
 
     $.ajax({
         url : "api/player/search/" + userId,
-    data: {},
+    data: {
+        season : season
+    },
     success : function(resp) {
             console.log('Load data success. ' + resp);
             fillUserInfo(resp);

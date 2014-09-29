@@ -7,11 +7,12 @@ body {
     margin: 0 auto;
 }
 
-th, legend {
+th {
     font-size: 42px;
 }
 
 legend {
+    font-size: 42px;
     margin-top: 80px;
 }
 
@@ -35,4 +36,15 @@ legend {
 .container button {
     height: 80px;
     width: 120px;
+}
+
+.bt-group-season {
+    float: right;
+}
+
+.logo {
+    background: url('http://static.wdjimg.com/www/images/icons-2x-scc21d2bca9.png') 0 -87px;
+    background-size:156px 237px;
+    height: 50px;
+    width: 50px;
 }

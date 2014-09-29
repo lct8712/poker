@@ -1,18 +1,20 @@
 package com.wandoujia.poker.service;
 
+import java.text.ParseException;
+import java.util.*;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.google.gdata.util.common.base.Pair;
 import com.wandoujia.poker.dao.DataDao;
 import com.wandoujia.poker.models.ApiResult;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.models.PlayerDataBean;
+import com.wandoujia.poker.models.SeasonInfoBean;
 import com.wandoujia.poker.util.ContentParser;
 import com.wandoujia.poker.util.DateUtil;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.text.ParseException;
-import java.util.*;
 
 /**
  * @author chentian
@@ -23,9 +25,7 @@ public class PokerServiceImpl implements PokerService {
     @Autowired
     private DataDao dataDao;
 
-    private List<GameInfoBean> gameInfoBeans;
-
-    private Map<String, PlayerDataBean> playerDataBeans;
+    private Map<String, SeasonInfoBean> seasonInfoBeanMap;
 
     public static final String LINE_DELIMITER = "\n";
 
@@ -35,24 +35,29 @@ public class PokerServiceImpl implements PokerService {
 
     @Override
     public boolean reloadData() {
-        gameInfoBeans = dataDao.loadGameInfos();
-        parsePlayers();
-        return !gameInfoBeans.isEmpty();
+        seasonInfoBeanMap = new HashMap<>();
+        boolean result = false;
+        for (String season : DateUtil.getSeasonList()) {
+            result |= reloadData(season);
+        }
+        return result;
     }
 
     @Override
-    public List<GameInfoBean> getGameInfoBeans() {
+    public List<GameInfoBean> getGameInfoBeans(String seasonName) {
         tryToReloadData();
-        return gameInfoBeans;
+        return getOrCreateSeason(seasonName).getGameInfoBeans();
     }
 
     @Override
     public GameInfoBean getGameInfoBean(String dateStr) {
         try {
             Date date = DateUtil.DATE_FORMATTER.parse(dateStr);
-            for (GameInfoBean gameInfoBean : gameInfoBeans) {
-                if (gameInfoBean.getDate().equals(date)) {
-                    return gameInfoBean;
+            for (SeasonInfoBean seasonInfoBean : seasonInfoBeanMap.values()) {
+                for (GameInfoBean gameInfoBean : seasonInfoBean.getGameInfoBeans()) {
+                    if (gameInfoBean.getDate().equals(date)) {
+                        return gameInfoBean;
+                    }
                 }
             }
             return null;
@@ -64,7 +69,7 @@ public class PokerServiceImpl implements PokerService {
     @Override
     public ApiResult updateGame(String dateStr, String content, String comment) {
         try {
-            List<Pair<String, Double>> players = new ArrayList<Pair<String, Double>>();
+            List<Pair<String, Double>> players = new ArrayList<>();
             String[] lines = content.split(LINE_DELIMITER);
             for (String line : lines) {
                 if (line.trim().isEmpty()) {
@@ -98,24 +103,24 @@ public class PokerServiceImpl implements PokerService {
     }
 
     @Override
-    public Map<String, PlayerDataBean> getPlayerDataBeans() {
+    public Map<String, PlayerDataBean> getPlayerDataBeans(String seasonName) {
         tryToReloadData();
-        return playerDataBeans;
+        return getOrCreateSeason(seasonName).getPlayerDataBeans();
     }
 
     @Override
-    public List<PlayerDataBean> getPlayerWithRanking(String type) {
+    public List<PlayerDataBean> getPlayerWithRanking(String type, String seasonName) {
         tryToReloadData();
-        List<PlayerDataBean> result = new ArrayList<PlayerDataBean>(playerDataBeans.values());
+        List<PlayerDataBean> result = new ArrayList<>(getPlayerDataBeans(seasonName).values());
         if (!StringUtils.isNotEmpty(type)) {
-            throw new IllegalArgumentException(getSupportTypeDesription());
+            throw new IllegalArgumentException(getSupportTypeDescription());
         }
 
         RankingType rankingType;
         try {
             rankingType = RankingType.valueOf(type);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(getSupportTypeDesription());
+            throw new IllegalArgumentException(getSupportTypeDescription());
         }
         switch (rankingType) {
             case sum:
@@ -131,13 +136,26 @@ public class PokerServiceImpl implements PokerService {
                 Collections.sort(result, new PlayerDataBean.StdDevComparator());
                 break;
             default:
-                throw new IllegalArgumentException(getSupportTypeDesription());
+                throw new IllegalArgumentException(getSupportTypeDescription());
         }
         Collections.reverse(result);
         return result;
     }
 
-    private String getSupportTypeDesription() {
+    private boolean reloadData(String seasonName) {
+        SeasonInfoBean currentSeason = getOrCreateSeason(seasonName);
+        currentSeason.setGameInfoBeans(dataDao.loadGameInfos(seasonName));
+        currentSeason.parsePlayers();
+        return !currentSeason.getGameInfoBeans().isEmpty();
+    }
+
+    private void tryToReloadData() {
+        if (seasonInfoBeanMap == null || seasonInfoBeanMap.isEmpty()) {
+            reloadData();
+        }
+    }
+
+    private String getSupportTypeDescription() {
         StringBuilder content = new StringBuilder();
         for (RankingType rankingType : RankingType.values()) {
             content.append(rankingType);
@@ -146,36 +164,13 @@ public class PokerServiceImpl implements PokerService {
         return content.toString();
     }
 
-    private void tryToReloadData() {
-        if (gameInfoBeans == null || gameInfoBeans.isEmpty()) {
-            reloadData();
-        }
-    }
-
-    private void parsePlayers() {
-        playerDataBeans = new HashMap<String, PlayerDataBean>();
-        for (GameInfoBean gameInfo : gameInfoBeans) {
-            for (Pair<String, Double> pair : gameInfo.getPlayers()) {
-                updatePlayer(pair);
-            }
-        }
-        for (PlayerDataBean playerDataBean : playerDataBeans.values()) {
-            playerDataBean.compute();
-        }
-    }
-
-    private void updatePlayer(Pair<String, Double> pair) {
-        PlayerDataBean player;
-        if (playerDataBeans.containsKey(pair.getFirst())) {
-            player = playerDataBeans.get(pair.getFirst());
-        } else {
-            player = new PlayerDataBean(pair.getFirst());
+    private SeasonInfoBean getOrCreateSeason(String seasonNumber) {
+        if (seasonInfoBeanMap.containsKey(seasonNumber)) {
+            return seasonInfoBeanMap.get(seasonNumber);
         }
 
-        List<Double> history = player.getHistory();
-        history.add(pair.getSecond());
-        player.setHistory(history);
-
-        playerDataBeans.put(pair.getFirst(), player);
+        SeasonInfoBean currentSeason = new SeasonInfoBean(seasonNumber);
+        seasonInfoBeanMap.put(seasonNumber, currentSeason);
+        return currentSeason;
     }
 }

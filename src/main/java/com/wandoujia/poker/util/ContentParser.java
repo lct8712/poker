@@ -16,7 +16,7 @@ public class ContentParser {
             return null;
         }
         try {
-            return new Pair<String, Double>(items[0].trim(), Double.valueOf(items[1]));
+            return new Pair<>(items[0].trim(), Double.valueOf(items[1]));
         } catch (NumberFormatException e) {
             return null;
         }
