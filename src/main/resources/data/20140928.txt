@@ -1,0 +1,8 @@
+toy	-65.0
+xiaohui	-143.5
+liuhuan	-6.75
+jiyang	-100.0
+liangliang	160.0
+chentian	161.25
+sunny	31.5
+zhida	-37.5
