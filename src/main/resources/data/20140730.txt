@@ -6,6 +6,6 @@ toy 35
 xiaohui 3
 yanguang 0
 yuehui -32.5
-chentian -46
-yuzhou -100
-luantao -150
+chentian -41
+yuzhou -95
+luantao -140

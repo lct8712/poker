@@ -1,9 +1,10 @@
-toy 35
+# 总和 -50，输的人每人加 10
 xiaohui 481
 chentian 100
-zhiyong -140
+toy 35
 luantao 25
-yanguang -70
 xiaoqing -34
-yuzhou -300
-zhida -146.5
+yanguang -60
+zhiyong -130
+yuzhou -290
+zhida -136.5

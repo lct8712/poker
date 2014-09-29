@@ -29,7 +29,7 @@ public class DataDaoFileImplTest {
                 System.out.println(DateUtil.DATE_FORMATTER.format(gameInfo.getDate()));
                 System.out.println(gameInfo.computeSum());
             }
-//            Assert.assertTrue(gameInfo.isValidate());
+            Assert.assertTrue(gameInfo.isValidate());
         }
     }
 }

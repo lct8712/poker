@@ -1,6 +1,7 @@
+# 总和 -40，输的人每人加 10
 rongxing 200
 xiaohui     81.5
-pengcheng   -50
-xiaoyue     -50
-wensy       -130
-liujinyu    -100
+pengcheng   -40
+xiaoyue     -40
+wensy       -120
+liujinyu    -90
