@@ -22,7 +22,7 @@ public class DataDaoFileImplTest {
     @Test
     public void testLoadGameInfos() throws Exception {
         List<GameInfoBean> gameInfos = dataDao.loadGameInfos("1");
-        Assert.assertEquals(67, gameInfos.size());
+        Assert.assertEquals(68, gameInfos.size());
 
         for (GameInfoBean gameInfo : gameInfos) {
             if (!gameInfo.isValidate()) {
