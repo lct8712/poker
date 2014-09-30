@@ -17,8 +17,8 @@ public class DateUtil {
 
     static {
         try {
-            seasons.put("1", new Pair<>(DATE_FORMATTER.parse("20010101"), DATE_FORMATTER.parse("20140928")));
-            seasons.put("2", new Pair<>(DATE_FORMATTER.parse("20140929"), DATE_FORMATTER.parse("21001231")));
+            seasons.put("1", new Pair<>(DATE_FORMATTER.parse("20010101"), DATE_FORMATTER.parse("20141001")));
+            seasons.put("2", new Pair<>(DATE_FORMATTER.parse("20141001"), DATE_FORMATTER.parse("21001231")));
         } catch (ParseException e) {
             e.printStackTrace();
         }
