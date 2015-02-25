@@ -16,6 +16,13 @@ legend {
     margin-top: 80px;
 }
 
+.btn-big {
+    font-size: 24px;
+    margin-bottom: 16px;
+    display: inherit;
+    width: 150px;
+}
+
 .navbar {
     padding: 10px;
 }

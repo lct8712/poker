@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gdata.util.common.base.Pair;
 import com.wandoujia.poker.dao.DataDao;
-import com.wandoujia.poker.models.ApiResult;
-import com.wandoujia.poker.models.GameInfoBean;
-import com.wandoujia.poker.models.PlayerDataBean;
-import com.wandoujia.poker.models.SeasonInfoBean;
+import com.wandoujia.poker.models.*;
 import com.wandoujia.poker.util.ContentParser;
 import com.wandoujia.poker.util.DateUtil;
 
@@ -27,6 +24,8 @@ public class PokerServiceImpl implements PokerService {
 
     private Map<String, SeasonInfoBean> seasonInfoBeanMap;
 
+    private Map<String, SeasonDurationBean> seasonDurations;
+
     public static final String LINE_DELIMITER = "\n";
 
     enum RankingType {
@@ -36,8 +35,10 @@ public class PokerServiceImpl implements PokerService {
     @Override
     public boolean reloadData() {
         seasonInfoBeanMap = new HashMap<>();
+        seasonDurations = dataDao.loadSeasonDurations();
         boolean result = false;
-        for (String season : DateUtil.getSeasonList()) {
+        List<String> seasonNames = Arrays.asList(seasonDurations.keySet().toArray(new String[seasonDurations.size()]));
+        for (String season : seasonNames) {
             result |= reloadData(season);
         }
         return result;
@@ -142,15 +143,45 @@ public class PokerServiceImpl implements PokerService {
         return result;
     }
 
+    @Override
+    public Map<String, SeasonDurationBean> getSeasonDurationBeans() {
+        tryToReloadData();
+        return seasonDurations;
+    }
+
+    @Override
+    public ApiResult updateSeasonDuration(String content) {
+        List<SeasonDurationBean> seasonDurationBeans = new ArrayList<>();
+        String[] lines = content.split(LINE_DELIMITER);
+        for (String line : lines) {
+            if (line.trim().isEmpty()) {
+                continue;
+            }
+
+            SeasonDurationBean seasonDurationBean = ContentParser.getSeasonDuration(line);
+            if (seasonDurationBean != null) {
+                seasonDurationBeans.add(seasonDurationBean);
+            } else {
+                return new ApiResult(false, "Line format error: " + line);
+            }
+        }
+
+        if (!dataDao.updateSeasonDurations(seasonDurationBeans)) {
+            return new ApiResult(false);
+        }
+        reloadData();
+        return new ApiResult(true);
+    }
+
     private boolean reloadData(String seasonName) {
         SeasonInfoBean currentSeason = getOrCreateSeason(seasonName);
-        currentSeason.setGameInfoBeans(dataDao.loadGameInfos(seasonName));
+        currentSeason.setGameInfoBeans(dataDao.loadGameInfos(seasonName, seasonDurations));
         currentSeason.parsePlayers();
         return !currentSeason.getGameInfoBeans().isEmpty();
     }
 
     private void tryToReloadData() {
-        if (seasonInfoBeanMap == null || seasonInfoBeanMap.isEmpty()) {
+        if (seasonDurations == null || seasonInfoBeanMap == null || seasonInfoBeanMap.isEmpty()) {
             reloadData();
         }
     }

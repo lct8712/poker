@@ -1,6 +1,7 @@
 package com.wandoujia.poker.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.wandoujia.poker.models.GameInfoBean;
+import com.wandoujia.poker.models.SeasonDurationBean;
 import com.wandoujia.poker.util.DateUtil;
 
 @ContextConfiguration(locations = { "classpath:applicationContext-poker.xml" })
@@ -21,7 +23,8 @@ public class DataDaoFileImplTest {
 
     @Test
     public void testLoadGameInfos() throws Exception {
-        List<GameInfoBean> gameInfos = dataDao.loadGameInfos("1");
+        Map<String, SeasonDurationBean> seasonBeanMap = dataDao.loadSeasonDurations();
+        List<GameInfoBean> gameInfos = dataDao.loadGameInfos("1", seasonBeanMap);
         Assert.assertEquals(68, gameInfos.size());
 
         for (GameInfoBean gameInfo : gameInfos) {
@@ -32,7 +35,7 @@ public class DataDaoFileImplTest {
             Assert.assertTrue(gameInfo.isValidate());
         }
 
-        gameInfos = dataDao.loadGameInfos("2");
+        gameInfos = dataDao.loadGameInfos("99", seasonBeanMap);
         Assert.assertEquals(0, gameInfos.size());
     }
 }

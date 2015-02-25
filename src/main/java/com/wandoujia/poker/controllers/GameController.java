@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.wandoujia.poker.models.ApiResult;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.service.PokerService;
+import com.wandoujia.poker.util.MediaType;
 
 /**
  * @author chentian
@@ -22,14 +23,14 @@ public class GameController {
     private PokerService pokerService;
 
     @RequestMapping(value = "/all", params = {"season"},
-            produces = "application/json; charset=utf-8")
+            produces = MediaType.MEDIA_TYPE_JSON)
     public @ResponseBody
     String getAll(@RequestParam(value = "season", required = true) String season) {
         List<GameInfoBean> games = pokerService.getGameInfoBeans(season);
         return new Gson().toJson(games);
     }
 
-    @RequestMapping(value = "/search/{date:\\d+}", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/search/{date:\\d+}", produces = MediaType.MEDIA_TYPE_JSON)
     public @ResponseBody
     String getOne(@PathVariable("date") String date) {
         GameInfoBean gameInfoBean = pokerService.getGameInfoBean(date);
@@ -37,7 +38,7 @@ public class GameController {
     }
 
     @RequestMapping(value = "/update", params = {"date", "content", "comment"},
-            method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+            method = RequestMethod.POST, produces = MediaType.MEDIA_TYPE_JSON)
     public @ResponseBody
     String update(
             @RequestParam(value = "date", required = true) String date,

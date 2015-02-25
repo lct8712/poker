@@ -1,5 +1,6 @@
 poker
 =====
+豌豆德州
 
 # 数据展示
 - 支持手机浏览器
@@ -18,12 +19,20 @@ poker
 - 每次的数据是一个文件
 
 # 接口
-- /api/player/all
-- /api/player/search/{username}
-- /api/player/ranking?type={sum,count,mean,stddev}
+- http://localhost:8080/api/game/all?season=1
 
-- /api/game/all
-- /api/game/search/{date}
+- /api/player/all?season=1
+- /api/player/search/{username}?season=1
+- /api/player/ranking?type={sum,count,mean,stddev}?season=1
+
+- /api/game/all?season=1
+- /api/game/search/{date}?season=1
 - /api/game/update
 
+- /api/season/list
+- /api/season/update
+
 - /api/reload
+
+# 页面
+http://localhost:8080/index.html

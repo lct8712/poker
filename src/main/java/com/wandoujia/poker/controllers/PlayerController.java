@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.wandoujia.poker.models.PlayerDataBean;
 import com.wandoujia.poker.service.PokerService;
+import com.wandoujia.poker.util.MediaType;
 
 /**
  * @author chentian
@@ -24,16 +25,14 @@ public class PlayerController {
     @Autowired
     private PokerService pokerService;
 
-    @RequestMapping(value = "/all", params = {"season"},
-            produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/all", params = {"season"}, produces = MediaType.MEDIA_TYPE_JSON)
     public @ResponseBody
     String getAll(@RequestParam(value = "season", required = true) String season) {
         Map<String, PlayerDataBean> players = pokerService.getPlayerDataBeans(season);
         return new Gson().toJson(players.values());
     }
 
-    @RequestMapping(value = "/search/{name:.+}", params = {"season"},
-            produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/search/{name:.+}", params = {"season"}, produces = MediaType.MEDIA_TYPE_JSON)
     public @ResponseBody
     String getOne(@PathVariable("name") String name,
                   @RequestParam(value = "season", required = true) String season) {
@@ -41,8 +40,7 @@ public class PlayerController {
         return new Gson().toJson(players.get(name));
     }
 
-    @RequestMapping(value = "/ranking", params = {"type", "season"},
-            produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/ranking", params = {"type", "season"}, produces = MediaType.MEDIA_TYPE_JSON)
     public @ResponseBody
     String ranking(@RequestParam(value = "type", required = true) String type,
                    @RequestParam(value = "season", required = true) String season) {

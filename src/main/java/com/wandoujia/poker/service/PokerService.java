@@ -6,6 +6,7 @@ import java.util.Map;
 import com.wandoujia.poker.models.ApiResult;
 import com.wandoujia.poker.models.GameInfoBean;
 import com.wandoujia.poker.models.PlayerDataBean;
+import com.wandoujia.poker.models.SeasonDurationBean;
 
 /**
  * @author chentian
@@ -23,4 +24,8 @@ public interface PokerService {
     Map<String, PlayerDataBean> getPlayerDataBeans(String seasonName);
 
     List<PlayerDataBean> getPlayerWithRanking(String type, String seasonName);
+
+    Map<String, SeasonDurationBean> getSeasonDurationBeans();
+
+    ApiResult updateSeasonDuration(String content);
 }
