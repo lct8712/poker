@@ -33,6 +33,7 @@ poker
 - /api/season/update
 
 - /api/reload
+- /api/zip
 
 # 页面
 http://localhost:8080/index.html

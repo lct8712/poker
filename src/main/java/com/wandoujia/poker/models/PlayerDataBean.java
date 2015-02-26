@@ -67,15 +67,4 @@ public class PlayerDataBean {
             return p1.getStdDev().compareTo(p2.getStdDev());
         }
     }
-
-    @Override
-    public String toString() {
-        return "PlayerDataBean{" +
-                "name='" + name + '\'' +
-                ", historyMoney=" + historyMoney +
-                ", sum=" + sum +
-                ", mean=" + mean +
-                ", stdDev=" + stdDev +
-                '}';
-    }
 }

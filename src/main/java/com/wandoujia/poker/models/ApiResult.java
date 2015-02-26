@@ -21,12 +21,4 @@ public class ApiResult {
         this.isSuccess = isSuccess;
         this.errorInfo = errorInfo;
     }
-
-    @Override
-    public String toString() {
-        return "ApiResult{" +
-                "isSuccess=" + isSuccess +
-                ", errorInfo='" + errorInfo + '\'' +
-                '}';
-    }
 }

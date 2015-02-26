@@ -1,5 +1,7 @@
 package com.wandoujia.poker.service;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -28,4 +30,6 @@ public interface PokerService {
     Map<String, SeasonDurationBean> getSeasonDurationBeans();
 
     ApiResult updateSeasonDuration(String content);
+
+    void compressAllData(OutputStream out) throws IOException;
 }

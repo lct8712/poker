@@ -4,6 +4,8 @@ import java.io.*;
 import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +119,24 @@ public class DataDaoFileImpl implements DataDao {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void compressAllData(OutputStream out) throws IOException {
+        ZipOutputStream zipOutputStream = new ZipOutputStream(out);
+        zipOutputStream.setLevel(ZipOutputStream.STORED);
+
+        AtomicReference<File> dataDirectory = new AtomicReference<>(new File(this.dataFileDir));
+        if (!dataDirectory.get().exists()) {
+            throw new IOException("Data file dir read error");
+        }
+
+        for (File file : FileUtils.listFiles(dataDirectory.get(), DATA_FILE_EXTENSIONS, false)) {
+            ZipEntry zipEntry = new ZipEntry(file.getPath());
+            zipOutputStream.putNextEntry(zipEntry);
+        }
+
+        zipOutputStream.close();
     }
 
     private String getSeasonFileName() {

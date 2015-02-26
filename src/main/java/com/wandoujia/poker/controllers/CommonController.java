@@ -1,5 +1,10 @@
 package com.wandoujia.poker.controllers;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +30,22 @@ public class CommonController {
     String reload() {
         ApiResult result = new ApiResult(pokerService.reloadData());
         return new Gson().toJson(result);
+    }
+
+    @RequestMapping(value = "/zip", produces = MediaType.MEDIA_TYPE_ZIP)
+    public void zip(HttpServletResponse response) {
+        response.setContentType(MediaType.MEDIA_TYPE_ZIP);
+        response.addHeader("Content-Disposition", "attachment; filename=\"data.zip\"");
+        response.addHeader("Content-Transfer-Encoding", "binary");
+
+        ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
+        try {
+            pokerService.compressAllData(outputBuffer);
+            response.getOutputStream().write(outputBuffer.toByteArray());
+            response.getOutputStream().flush();
+            outputBuffer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

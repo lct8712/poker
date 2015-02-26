@@ -1,5 +1,7 @@
 package com.wandoujia.poker.service;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.util.*;
 
@@ -171,6 +173,11 @@ public class PokerServiceImpl implements PokerService {
         }
         reloadData();
         return new ApiResult(true);
+    }
+
+    @Override
+    public void compressAllData(OutputStream out) throws IOException {
+        dataDao.compressAllData(out);
     }
 
     private boolean reloadData(String seasonName) {

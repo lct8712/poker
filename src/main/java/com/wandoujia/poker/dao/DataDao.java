@@ -1,5 +1,7 @@
 package com.wandoujia.poker.dao;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -19,4 +21,9 @@ public interface DataDao {
     Map<String, SeasonDurationBean> loadSeasonDurations();
 
     boolean updateSeasonDurations(List<SeasonDurationBean> seasonDurationBeans);
+
+    /**
+     * Compress all data into one zip file
+     */
+    void compressAllData(OutputStream out) throws IOException;
 }

@@ -40,13 +40,4 @@ public class GameInfoBean {
             return gameInfoBean2.getDate().compareTo(gameInfoBean.getDate());
         }
     }
-
-    @Override
-    public String toString() {
-        return "GameInfoBean{" +
-                "date=" + date +
-                ", comments='" + comments + '\'' +
-                ", players=" + players +
-                '}';
-    }
 }
